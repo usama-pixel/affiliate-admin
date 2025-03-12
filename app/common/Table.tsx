@@ -15,6 +15,10 @@ type Props = {
   rowClassName?: string
   cellClassName?: string
   emptyMessage?: string
+  enableActions?: boolean,
+  handleOpenView?: (id: number | undefined) => void
+  handleOpenEdit?: (id: number | undefined) => void
+  handleOpenDelete?: (id: number | undefined) => void
   onRowClick?: (row: any) => void
   keyExtractor?: (row: any, index: number) => string | number
 }
@@ -28,7 +32,11 @@ function Table({
   rowClassName = '',
   cellClassName = '',
   emptyMessage = 'No data available',
+  enableActions = false,
   onRowClick,
+  handleOpenView,
+  handleOpenEdit,
+  handleOpenDelete,
   keyExtractor = (_row: any, index: number): number => index
 }: Props) {
   if (!data || data.length === 0) {
@@ -41,7 +49,7 @@ function Table({
       ? { key: header, label: header } 
       : header
   );
-
+  console.log({enableActions})
   return (
     <div className={`overflow-x-auto ${className}`}>
       <table className={`min-w-full divide-y divide-gray-200 ${tableClassName}`}>
@@ -56,6 +64,7 @@ function Table({
                 {header.label}
               </th>
             ))}
+            {enableActions && <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>Actions</th>}
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -78,6 +87,20 @@ function Table({
                   </td>
                 );
               })}
+              {
+                enableActions &&
+                <td className='px-6 py-4 whitespace-nowrap flex flex-row gap-3 mr-auto w-fit'>
+                  {handleOpenView && (
+                    <button className='bg-gray-500 w-16 rounded text-white p-2 cursor-pointer hover:bg-gray-600 active:bg-gray-800' onClick={() => (row && row.id) ? handleOpenView(row.id) : undefined}>View</button>
+                  )}
+                  {handleOpenEdit && (
+                    <button className='bg-yellow-500 w-16 rounded text-white p-2 cursor-pointer hover:bg-yellow-600 active:bg-yellow-800' onClick={() => (row && row.id) ? handleOpenEdit(row.id) : undefined}>Edit</button>
+                  )}
+                  {handleOpenDelete && (
+                    <button className='bg-red-500 w-16 rounded text-white p-2 cursor-pointer hover:bg-red-600 active:bg-red-800' onClick={() => (row && row.id) ? handleOpenDelete(row.id) : undefined}>Delete</button>
+                  )}
+                </td>
+              }
             </tr>
           ))}
         </tbody>
