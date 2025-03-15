@@ -75,7 +75,7 @@ function Table({
               onClick={onRowClick ? () => onRowClick(row) : undefined}
             >
               {normalizedHeaders.map((header, cellIndex) => {
-                const value = row[header.key];
+                const value = row[header.key]+"";
                 return (
                   <td
                     key={cellIndex}
