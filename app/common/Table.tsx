@@ -64,7 +64,11 @@ function Table({
                 scope="col"
                 className={`px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ${headerClassName}`}
               >
-                {header.label}
+                {header.key.endsWith('At')
+                  ? header.label.slice(0, header.label.length - 2)
+                  : header.key.startsWith('is_')
+                  ? header.label.slice(2)
+                  : header.label}
               </th>
             ))}
             {enableActions && (
