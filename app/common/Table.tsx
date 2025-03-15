@@ -1,4 +1,6 @@
 import React from 'react'
+import { FaEye, FaTrash } from 'react-icons/fa';
+import { FaPencil } from 'react-icons/fa6';
 
 type HeaderConfig = {
   key: string;       // Property name in data
@@ -91,13 +93,28 @@ function Table({
                 enableActions &&
                 <td className='px-6 py-4 whitespace-nowrap flex flex-row gap-3 mr-auto w-fit'>
                   {handleOpenView && (
-                    <button className='bg-gray-500 w-16 rounded text-white p-2 cursor-pointer hover:bg-gray-600 active:bg-gray-800' onClick={() => (row && row.id) ? handleOpenView(row.id) : undefined}>View</button>
+                    <button
+                      className='flex justify-center items-center bg-gray-500 w-fit rounded text-white p-2 cursor-pointer hover:bg-gray-600 active:bg-gray-800'
+                      onClick={() => (row && row.id) ? handleOpenView(row.id) : undefined}
+                    >
+                      <FaEye />
+                    </button>
                   )}
                   {handleOpenEdit && (
-                    <button className='bg-yellow-500 w-16 rounded text-white p-2 cursor-pointer hover:bg-yellow-600 active:bg-yellow-800' onClick={() => (row && row.id) ? handleOpenEdit(row.id) : undefined}>Edit</button>
+                    <button
+                      className='flex justify-center items-center bg-yellow-500 w-fit rounded text-white p-2 cursor-pointer hover:bg-yellow-600 active:bg-yellow-800'
+                      onClick={() => (row && row.id) ? handleOpenEdit(row.id) : undefined}
+                    >
+                      <FaPencil />
+                    </button>
                   )}
                   {handleOpenDelete && (
-                    <button className='bg-red-500 w-16 rounded text-white p-2 cursor-pointer hover:bg-red-600 active:bg-red-800' onClick={() => (row && row.id) ? handleOpenDelete(row.id) : undefined}>Delete</button>
+                    <button
+                      className='flex justify-center items-center bg-red-500 w-fit rounded text-white p-2 cursor-pointer hover:bg-red-600 active:bg-red-800'
+                      onClick={() => (row && row.id) ? handleOpenDelete(row.id) : undefined}
+                    >
+                      <FaTrash />
+                    </button>
                   )}
                 </td>
               }

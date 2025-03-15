@@ -30,6 +30,7 @@ function Posts({}: Props) {
   const headers = posts.length === 0 ? posts : Object.keys(posts?.[0])?.map(key => {
     if (key.includes('content')) return '';
     if (key.includes('image_url')) return '';
+    if (key.includes('deleted')) return '';
     if (key.includes('_')) {
      return { key, label: key.replace('_', ' ') }
     }
